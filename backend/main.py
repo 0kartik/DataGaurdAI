@@ -26,7 +26,7 @@ app = FastAPI(title="Data Guard AI API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://dataguard-ai.netlify.app/", "http://localhost:3000"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
