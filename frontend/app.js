@@ -1,4 +1,4 @@
-const API_BASE = window.DATAGUARD_API_BASE || "http://localhost:8000";
+const API_BASE = window.DATAGUARD_API_BASE || "https://datagaurdai.onrender.com" || "http://localhost:8000";
 
 const AGENT_STAGES = [
   { id: "ingestion",  label: "Ingestion" },
