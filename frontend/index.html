@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Data Guard AI — Agentic Data Quality Monitoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script>window.DATAGUARD_API_BASE = "http://localhost:8000";</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Data Guard AI</span>
+    </div>
+    <p class="brand-tag">Agentic data quality monitoring</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Nine agents. One dataset.<br>Zero manual cleanup.</h1>
+    <p class="hero-sub">Upload a CSV and watch a chain of specialized agents inspect,
+      score, repair, and explain your data --- end to end, in seconds.</p>
+  </section>
+
+  <section class="upload-panel" id="upload-panel">
+    <div class="upload-grid">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload CSV file">
+        <input type="file" id="file-input" accept=".csv" hidden />
+        <div class="dropzone-inner">
+          <div class="dz-icon" aria-hidden="true">↑</div>
+          <p class="dz-title">Drop a CSV here</p>
+          <p class="dz-sub">or click to browse — .csv files only</p>
+        </div>
+        <p class="dz-filename" id="dz-filename"></p>
+      </div>
+
+      <div class="config">
+        <button class="run-btn" id="run-btn" disabled>
+          <span id="run-btn-label">Run pipeline</span>
+        </button>
+        <p class="run-hint" id="run-hint">Select a CSV file to begin.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rail-section" id="rail-section" hidden>
+    <div class="rail" id="rail"></div>
+  </section>
+
+  <section class="results" id="results" hidden>
+
+    <div class="score-band">
+      <div class="score-card">
+        <p class="score-label">Before</p>
+        <p class="score-num" id="score-before">—</p>
+      </div>
+      <div class="score-arrow" aria-hidden="true">→</div>
+      <div class="score-card score-card-after">
+        <p class="score-label">After</p>
+        <p class="score-num" id="score-after">—</p>
+      </div>
+      <div class="score-card score-card-delta">
+        <p class="score-label">Improvement</p>
+        <p class="score-num" id="score-delta">—</p>
+      </div>
+    </div>
+
+    <div class="panel-grid">
+
+      <div class="panel" id="panel-overview">
+        <h2><span class="step-tag">01</span> Dataset overview</h2>
+        <div class="stat-row">
+          <div class="stat"><span class="stat-num" id="stat-rows">—</span><span class="stat-label">rows</span></div>
+          <div class="stat"><span class="stat-num" id="stat-cols">—</span><span class="stat-label">columns</span></div>
+        </div>
+        <div class="table-wrap"><table id="table-profile"></table></div>
+      </div>
+
+      <div class="panel" id="panel-issues">
+        <h2><span class="step-tag">02</span> Detected issues</h2>
+        <div class="table-wrap"><table id="table-issues"></table></div>
+      </div>
+
+      <div class="panel" id="panel-plan">
+        <h2><span class="step-tag">03</span> Repair plan</h2>
+        <div class="table-wrap"><table id="table-recs"></table></div>
+        <div class="plan-steps" id="plan-steps"></div>
+      </div>
+
+      <div class="panel" id="panel-log">
+        <h2><span class="step-tag">04</span> Execution log</h2>
+        <div class="table-wrap"><table id="table-log"></table></div>
+      </div>
+
+      <div class="panel panel-wide" id="panel-explanation">
+        <h2><span class="step-tag">05</span> Explanation</h2>
+        <div class="explanation-text" id="explanation-text">—</div>
+      </div>
+
+      <div class="panel" id="panel-monitor">
+        <h2><span class="step-tag">06</span> Monitoring</h2>
+        <div class="mon-grid" id="mon-grid"></div>
+      </div>
+
+      <div class="panel panel-wide" id="panel-cleaned">
+        <h2><span class="step-tag">07</span> Cleaned dataset</h2>
+        <div class="table-wrap"><table id="table-cleaned"></table></div>
+        <a class="download-btn" id="download-btn" href="#">Download cleaned CSV</a>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="error-banner" id="error-banner" hidden></div>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">Data Guard AI</div>
+</footer>
+
+<script src="app.js?v=3"></script>
+</body>
+</html>
